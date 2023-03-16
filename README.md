@@ -1,5 +1,5 @@
-# Sudok solver
-Straightforward sudoku solver using different strategies and drawing algorithms.
+# Sudoku solver
+Straightforward sudoku puzzle solver using different strategies and drawing algorithms.
 
 ## Extendability
 You can easily extend the code with your own solving strategies. Simply create a class derived from the `Solver` class and make sure the `SolverFactory` can find it based on a unique string. Then you can use that string in the main program.
