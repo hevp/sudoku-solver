@@ -17,7 +17,7 @@ class Solver:
 
 class BacktrackerSolver(Solver):
     def run(self, i: int = 0):
-        while self.puzzle.data[i]:
+        while self.puzzle.get(i):
             i += 1
             if i >= self.puzzle.size ** 2:
                 return True

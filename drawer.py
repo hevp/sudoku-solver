@@ -7,18 +7,18 @@ class Drawer:
         self.puzzle = puzzle
         self.lastdraw = self.puzzle.size ** 2
 
-    def draw(self, clear: bool = True):
+    def draw(self, clear: bool = False):
         if clear:
             for i in range(self.puzzle.size):
                 sys.stdout.write("\x1b[1A\x1b[2K")
 
         for i in range(self.puzzle.size * self.puzzle.size):
-            col = '\033[31m' if self.puzzle.data[i] != self.puzzle.orgdata[i] else '\033[0m'
+            col = '\033[31m' if self.puzzle.changed(i) else '\033[0m'
             e = '\n' if i % self.puzzle.size == (self.puzzle.size - 1) else ' '
-            sys.stdout.write(f"{col}{self.puzzle.data[i]:>2}\033[0m{e}")
+            sys.stdout.write(f"{col}{self.puzzle.get(i):>2}\033[0m{e}")
 
     def update(self, i: int = 0):
-        self.draw()
+        self.draw(True)
 
 class SimpleDrawer(Drawer):
     def update(self, i: int = 0):
