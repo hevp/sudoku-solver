@@ -15,6 +15,15 @@ class Puzzle:
             self.rawdata = f.readlines()
 
         self.data['rows'] = [[int(c) for c in l.strip().split()] for l in self.rawdata]
+
+        # general size checks
+        if min(map(len, self.data['rows'])) != max(map(len, self.data['rows'])):
+            raise Exception("varying puzzle row size")
+        if not len(self.data['rows']) or len(self.data['rows'][0]) != len(self.data['rows']):
+            raise Exception("puzzle row - column size mismatch")
+        if math.sqrt(len(self.data['rows'])) != math.sqrt(len(self.data['rows'])) // 1:
+            raise Exception("puzzle size not quadratic")
+
         self.size = len(self.data['rows'])
         self.blocksize = int(math.sqrt(self.size))
 
@@ -26,6 +35,13 @@ class Puzzle:
             self.data['blocks'].append(reduce(lambda x, y: x + self.data['rows'][yo + y][xo:xo + self.blocksize], range(self.blocksize), []))
 
         self.orgdata = copy.deepcopy(self.data)
+
+        # general value checks
+        for e in ['rows', 'cols', 'blocks']:
+            for i in range(self.size):
+                f = list(filter(lambda x: x, self.data[e][i]))
+                if len(f) != len(set(f)):
+                    raise Exception(f"duplicate values in {e[:-1]} {i}")
 
     def in_row(self, value: int, i: int):
         return value in self.data['rows'][i // self.size]
