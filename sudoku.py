@@ -1,22 +1,32 @@
 #!/usr/bin/env python3
 
+import argparse
 import sys
 from drawer import DrawerFactory
 from puzzle import Puzzle
 from solver import SolverFactory
 
-def main(args):
-    if not len(args):
-        print("error: need a file name as argument")
-        sys.exit(1)
+def main():
+    parser = argparse.ArgumentParser(
+                    prog=sys.argv[0],
+                    description='Solve any valid sudoku')
 
-    puzzle = Puzzle(args[0])
+    parser.add_argument('filename', type=str)
+    parser.add_argument('-d', '--delay', default=0.05, type=float)
+    parser.add_argument('-f', '--fast', action='store_true')
+
+    args = parser.parse_args()
+
+    puzzle = Puzzle(args.filename)
     drawer = DrawerFactory.get("default", puzzle=puzzle)
-    solver = SolverFactory.get("backtrack", puzzle=puzzle, drawer=drawer, delay=0.05 if len(args) < 2 else float(args[1]))
+    solver = SolverFactory.get("backtrack", puzzle=puzzle, drawer=drawer, delay=args.delay)
 
     drawer.draw()
-    if not solver.solve():
+    if not solver.solve(draw=not args.fast):
         print("there is no solution!")
 
+    if args.fast:
+        drawer.draw(True)
+
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
