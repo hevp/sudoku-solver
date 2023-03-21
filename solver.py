@@ -31,8 +31,8 @@ class BacktrackerSolver(Solver):
                 if self.run(i):
                     return True
                 self.puzzle.set(0, i)
-                #if self.draw:
-                    #self.drawer.update(i)
+                if self.draw:
+                    self.drawer.update(i)
 
         return False
 

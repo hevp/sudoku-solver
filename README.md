@@ -10,7 +10,22 @@ Same holds for the drawing strategy in the console (or any other output). Inheri
 Enter the following command:
 
 ```sh
-./sudoku.py <filename>
+$ ./sudoku.py <filename> [<options>]
 ```
 
-An optional second argument sets the delay per iteration (e.g. 0.01 seconds)
+The following options are available:
+
+```sh
+$ ./sudoku.py -h
+usage: ./sudoku.py [-h] [-d DELAY] [-p] [-f] filename
+
+Solve any valid sudoku
+
+positional arguments:
+  filename
+
+options:
+  -h, --help                show this help message and exit
+  -d DELAY, --delay DELAY
+  -f, --fast
+```

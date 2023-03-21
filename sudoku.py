@@ -12,7 +12,7 @@ def main():
                     description='Solve any valid sudoku')
 
     parser.add_argument('filename', type=str)
-    parser.add_argument('-d', '--delay', default=0.05, type=float)
+    parser.add_argument('-d', '--delay', default=0, type=float)
     parser.add_argument('-f', '--fast', action='store_true')
 
     args = parser.parse_args()
