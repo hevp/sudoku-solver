@@ -13,12 +13,13 @@ def main():
 
     parser.add_argument('filename', type=str)
     parser.add_argument('-d', '--delay', default=0, type=float)
+    parser.add_argument('-p', '--progress', action='store_true')
     parser.add_argument('-f', '--fast', action='store_true')
 
     args = parser.parse_args()
 
     puzzle = Puzzle(args.filename)
-    drawer = DrawerFactory.get("default", puzzle=puzzle)
+    drawer = DrawerFactory.get("default" if not args.progress else "progress", puzzle=puzzle)
     solver = SolverFactory.get("backtrack", puzzle=puzzle, drawer=drawer, delay=args.delay)
 
     drawer.draw()
