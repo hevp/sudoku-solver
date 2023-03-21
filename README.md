@@ -22,10 +22,12 @@ usage: ./sudoku.py [-h] [-d DELAY] [-p] [-f] filename
 Solve any valid sudoku
 
 positional arguments:
-  filename
+  filename              File name of the puzzle
 
 options:
-  -h, --help                show this help message and exit
+  -h, --help            show this help message and exit
   -d DELAY, --delay DELAY
-  -f, --fast
+                        Time delay per iteration
+  -p, --progress        Show progress bar instead of puzzle
+  -f, --fast            Don't draw intermediate steps
 ```

@@ -11,10 +11,10 @@ def main():
                     prog=sys.argv[0],
                     description='Solve any valid sudoku')
 
-    parser.add_argument('filename', type=str)
-    parser.add_argument('-d', '--delay', default=0, type=float)
-    parser.add_argument('-p', '--progress', action='store_true')
-    parser.add_argument('-f', '--fast', action='store_true')
+    parser.add_argument('filename', type=str, help="File name of the puzzle")
+    parser.add_argument('-d', '--delay', default=0, type=float, help="Time delay per iteration")
+    parser.add_argument('-p', '--progress', action='store_true', help="Show progress bar instead of puzzle")
+    parser.add_argument('-f', '--fast', action='store_true', help="Don't draw intermediate steps")
 
     args = parser.parse_args()
 
